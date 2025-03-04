@@ -1,35 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// App.jsx
+import React, { useState } from 'react';
+import SolarSystem from './SolarSystem';
+import ControlPanel from './ControlPanel';
 
 function App() {
-  const [count, setCount] = useState(0)
+  // Define the default configurations for your planets.
+  const [config, setConfig] = useState([
+    { size: 0.5, speed: 0.5, orbitDistance: 5, modelPath: '/planet1.glb' },
+    { size: 0.7, speed: 0.3, orbitDistance: 7, modelPath: '/planet2.glb' },
+    { size: 0.4, speed: 0.8, orbitDistance: 9, modelPath: '/planet3.glb' },
+  ]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="relative w-screen h-screen">
+      {/* 3D Solar System Scene */}
+      <SolarSystem config={config} />
+      {/* UI Control Panel */}
+      <ControlPanel config={config} setConfig={setConfig} />
+    </div>
+  );
 }
 
-export default App
+export default App;
